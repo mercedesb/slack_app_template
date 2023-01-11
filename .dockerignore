@@ -1,0 +1,8 @@
+/.bundle/
+/.byebug_history
+/.dockerignore
+/.env
+/.git
+/log/*
+/spec/*
+/tmp/*

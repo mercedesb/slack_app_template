@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+set -vx
+
+bin/rake db:migrate
+bin/honeybadger deploy \
+  --environment "$RAILS_ENV" \
+  --repository "cloudcity/TODO: directory_name" \
+  --revision "${SOURCE_VERSION:-$HEROKU_SLUG_COMMIT}" \
+  --user heroku

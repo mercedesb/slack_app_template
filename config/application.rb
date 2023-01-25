@@ -28,7 +28,8 @@ module RoundRobin
     config.cache_store = :redis_cache_store, {
       url: ENV.fetch('REDIS_URL'),
       pool_size: ENV.fetch('RAILS_MAX_THREADS', 5),
-      pool_timeout: 1
+      pool_timeout: 1,
+      reconnect_attempts: 1
     }
     config.autoload_paths << config.root.join("app/jobs")
 

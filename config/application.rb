@@ -32,14 +32,13 @@ module RoundRobin
     }
     config.autoload_paths << config.root.join("app/jobs")
 
-    # if ENV.key?("HOST")
-    #   config.hosts << ENV['HOST']
-    #   config.middleware.insert_before(
-    #     ActionDispatch::HostAuthorization,
-    #     Rack::CanonicalHost, ENV['HOST'], cache_control: 'max-age=3600'
-    #   )
-    # end
-
-    # config.hosts << ENV["ADDITIONAL_HOSTS"].split(",") if ENV.key?("ADDITIONAL_HOSTS")
+    if ENV.key?("HOST") && !ENV['HOST'].blank?
+      config.hosts << ENV['HOST']
+      config.middleware.insert_before(
+        ActionDispatch::HostAuthorization,
+        Rack::CanonicalHost, ENV['HOST'], cache_control: 'max-age=3600'
+      )
+    end
+    config.hosts << ENV["ADDITIONAL_HOSTS"].split(",") if ENV.key?("ADDITIONAL_HOSTS") && !ENV["ADDITIONAL_HOSTS"].blank?
   end
 end
